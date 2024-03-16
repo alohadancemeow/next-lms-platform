@@ -13,31 +13,13 @@ import { Course } from "@prisma/client";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Combobox } from "@/components/ui/combobox";
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-
-import { Check, ChevronsUpDown } from "lucide-react";
 
 interface CategoryFormProps {
   initialData: Course;
@@ -55,7 +37,6 @@ export const CategoryForm = ({
   options,
 }: CategoryFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const toggleEdit = () => setIsEditing((current) => !current);
 
@@ -135,83 +116,6 @@ export const CategoryForm = ({
             </div>
           </form>
         </Form>
-
-        // <Form {...form}>
-        //   <form
-        //     onSubmit={form.handleSubmit(onSubmit)}
-        //     className="space-y-6"
-        //   >
-        //     <FormField
-        //       control={form.control}
-        //       name="categoryId"
-        //       render={({ field }) => (
-        //         <FormItem className="flex flex-col">
-        //           <Popover open={open} onOpenChange={setOpen}>
-        //             <PopoverTrigger asChild>
-        //               <FormControl>
-        //                 <Button
-        //                   variant="outline"
-        //                   role="combobox"
-        //                   className={cn(
-        //                     "w-[200px] justify-between",
-        //                     !field.value && "text-muted-foreground"
-        //                   )}
-        //                 >
-        //                   {field.value
-        //                     ? options.find(
-        //                         (option) => option.value === field.value
-        //                       )?.label
-        //                     : "Select option..."}
-        //                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        //                 </Button>
-        //               </FormControl>
-        //             </PopoverTrigger>
-        //             <PopoverContent className="w-[200px] p-0">
-        //               <Command>
-        //                 <CommandInput
-        //                   placeholder="Search framework..."
-        //                   className="h-9"
-        //                 />
-        //                 <CommandEmpty>No framework found.</CommandEmpty>
-        //                 <CommandGroup>
-        //                   {options.map((option) => (
-        //                     <CommandItem
-        //                       key={option.value}
-        //                       onSelect={() => {
-        //                         field.onChange(
-        //                           option.value === field.value
-        //                             ? ""
-        //                             : option.value
-        //                         );
-        //                         setOpen(false);
-        //                       }}
-        //                     >
-        //                       <Check
-        //                         className={cn(
-        //                           "mr-2 h-4 w-4",
-        //                           field.value === option.value
-        //                             ? "opacity-100"
-        //                             : "opacity-0"
-        //                         )}
-        //                       />
-        //                       {option.label}
-        //                     </CommandItem>
-        //                   ))}
-        //                 </CommandGroup>
-        //               </Command>
-        //             </PopoverContent>
-        //           </Popover>
-        //           <FormMessage />
-        //         </FormItem>
-        //       )}
-        //     />
-        //     <div className="flex items-center gap-x-2">
-        //       <Button disabled={!isValid || isSubmitting} type="submit">
-        //         Save
-        //       </Button>
-        //     </div>
-        //   </form>
-        // </Form>
       )}
     </div>
   );

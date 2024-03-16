@@ -2,15 +2,14 @@
 
 import * as z from "zod";
 import axios from "axios";
-import { Pencil, PlusCircle, ImageIcon, File, Loader2, X } from "lucide-react";
+import { PlusCircle, File, Loader2, X } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Attachment, Course } from "@prisma/client";
-import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-// import { FileUpload } from "@/components/file-upload";
+import { FileUpload } from "@/components/file-upload";
 
 interface AttachmentFormProps {
   initialData: Course & { attachments: Attachment[] };
@@ -107,14 +106,14 @@ export const AttachmentForm = ({
       )}
       {isEditing && (
         <div>
-          {/* <FileUpload
+          <FileUpload
             endpoint="courseAttachment"
             onChange={(url) => {
               if (url) {
                 onSubmit({ url: url });
               }
             }}
-          /> */}
+          />
           <div>File upload</div>
           <div className="text-xs text-muted-foreground mt-4">
             Add anything your students might need to complete the course.
