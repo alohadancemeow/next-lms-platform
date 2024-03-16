@@ -11,6 +11,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from "@/components/ui/command";
 import {
   Popover,
@@ -37,8 +38,7 @@ export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
           className="w-full justify-between"
         >
           {value
-            ? options.length !== 0 &&
-              options.find((option) => option.value === value)?.label
+            ? options.find((option) => option.value === value)?.label
             : "Select option..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -46,28 +46,32 @@ export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
       <PopoverContent className="w-full p-0">
         <Command>
           <CommandInput placeholder="Search option..." />
-          <CommandEmpty>No option found.</CommandEmpty>
-          <CommandGroup>
-            {options.map((option) => (
-              <CommandItem
-                key={option.value}
-                onSelect={() => {
-                  onChange(option.value === value ? "" : option.value);
-                  setOpen(false);
-                }}
-              >
-                <Check
-                  className={cn(
-                    "mr-2 h-4 w-4",
-                    value === option.value ? "opacity-100" : "opacity-0"
-                  )}
-                />
-                {option.label}
-              </CommandItem>
-            ))}
-          </CommandGroup>
+          <CommandList>
+            <CommandEmpty>No option found.</CommandEmpty>
+            <CommandGroup>
+              {options.map((option) => (
+                <CommandItem
+                  key={option.value}
+                  onSelect={() => {
+                    onChange(option.value === value ? "" : option.value);
+                    setOpen(false);
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      value === option.value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  {option.label}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
         </Command>
       </PopoverContent>
     </Popover>
   );
 };
+
+// issue fixed: https://github.com/shadcn-ui/ui/issues/2963
